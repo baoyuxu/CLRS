@@ -19,22 +19,6 @@ struct maximum_subarray
     maximum_subarray(ssize_t left, ssize_t right, T &&s)
         :max_left(left), max_right(right), sum(s)
     {}
-    bool operator<(const maximum_subarray &o)
-    {
-        return sum < o.sum;
-    }
-    bool operator>(const maximum_subarray &o)
-    {
-        return sum > o.sum;
-    }
-    bool operator<=(const maximum_subarray &o)
-    {
-        return sum <= o.sum;
-    }
-    bool operator>=(const maximum_subarray &o)
-    {
-        return sum >= o.sum;
-    }
 };
 
 template<typename T>
@@ -76,9 +60,9 @@ maximum_subarray<T> find_maximum_subarray(T *array, ssize_t low, ssize_t high)
     maximum_subarray<T> left_max = find_maximum_subarray(array, low, mid);
     maximum_subarray<T> right_max = find_maximum_subarray(array, mid+1, high);
     maximum_subarray<T> crossing_max = find_max_crossing_subarray(array, low, mid, high);
-    if(left_max >= right_max && left_max >= crossing_max)
+    if(left_max.sum >= right_max.sum && left_max.sum >= crossing_max.sum)
         return left_max;
-    else if(right_max >= left_max && right_max >= crossing_max)
+    else if(right_max.sum >= left_max.sum && right_max.sum >= crossing_max.sum)
         return right_max;
     else
         return crossing_max;
