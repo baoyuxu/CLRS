@@ -2,6 +2,10 @@
 #include<functional>
 #include<vector>
 
+#ifdef DEBUG
+#define private public
+#endif
+
 namespace XY
 {
 
@@ -13,9 +17,62 @@ class heap
         class heap_vec;
     public:
         heap(std::vector<T> const &h)
-            :_heap(heap_vec<T>(h)), compare(Compare())
+            :_heap(heap_vec<T>(h)), _compare(Compare()), _size(_heap.size())
         {
             heap_build();
+        }
+
+        void insert(T const &o)
+        {
+            _heap.push_back(o);
+            ++_size;
+            size_t pos = _size;
+            while(pos>1 && compare(_heap[pos], _heap[parent(pos)]))
+            {
+                std::swap(_heap[pos], _heap[parent(pos)]);
+                pos = parent(pos);
+            }
+        }
+        void insert(T &&o)
+        {
+            _heap.push_back(o);
+            ++_size;
+            size_t pos = _size;
+            while(pos>1 && compare(_heap[pos], _heap[parent(pos)]))
+            {
+                std::swap(_heap[pos], _heap[parent(pos)]);
+                pos = parent(pos);
+            }
+        }
+        T const &maximum()
+        {
+            return _heap[1];
+        }
+        void extract_maxmum()
+        {
+            _heap[1] = _heap[_size];
+            _heap.pop_back();
+            --_size;
+        }
+        void increase_key(size_t p, T const &k)
+        {
+            size_t pos = p+1;
+            while(pos > 1&& compare(k, _heap[parent(pos)]) )
+            {
+                _heap[pos] = _heap[parent(pos)];
+                pos = parent(pos);
+            }
+            _heap[pos] = k;
+        }
+        void increase_key(size_t p, T &&k)
+        {
+            size_t pos = p+1;
+            while(pos > 1 && compare(k, _heap[parent(pos)]) )
+            {
+                _heap[pos] = _heap[parent(pos)];
+                pos = parent(pos);
+            }
+            _heap[pos] = k;
         }
 
         std::vector<T> heap_sort()
@@ -25,40 +82,39 @@ class heap
             for(size_t i=0; i<s; ++i)
             {
                 result.push_back(_heap[1]);
-                _heap[1] = _heap[s-i];
-                _heap.pop_back();
-                heap_ify(1);
+                std::swap(_heap[1], _heap[s-i]);
+                heap_ify(1, s-i-1);
             }
             return result;
         }
 
     private:
         heap_vec<T> _heap;
-        Compare compare;
-        void heap_ify(size_t const i)
+        Compare _compare;
+        size_t _size;
+        void heap_ify(size_t const i, size_t size)
         {
             size_t l_offset = left(i);
             size_t r_offset = right(i);
             size_t largest = i;
-            if(l_offset <= size() && compare(_heap[l_offset], _heap[largest]))
+            if(l_offset <= size && _compare(_heap[l_offset], _heap[largest]))
                 largest = l_offset;
-            if(r_offset <= size() && compare(_heap[r_offset], _heap[largest]))
+            if(r_offset <= size && _compare(_heap[r_offset], _heap[largest]))
                 largest = r_offset;
             std::swap(_heap[i], _heap[largest]);
             if(largest != i)
-                heap_ify(largest);
+                heap_ify(largest, size);
         }
 
         void heap_build()
         {
-            size_t s = size();
-            for(size_t i = s/2; i>=1; --i)
-                heap_ify(i);
+            for(size_t i = _size/2; i>=1; --i)
+                heap_ify(i, _size);
         }
 
         size_t size()
         {
-            return _heap.size();
+            return _size;
         }
 
         size_t parent(size_t const i)
@@ -92,6 +148,14 @@ class heap
                 void pop_back()
                 {
                     vec.pop_back();
+                }
+                void push_back(T const &o)
+                {
+                    vec.push_back(o);
+                }
+                void push_back(T &&o)
+                {
+                    vec.push_back(o);
                 }
             private:
                 std::vector<U> vec;
