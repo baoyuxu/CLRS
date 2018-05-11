@@ -1,4 +1,4 @@
-SUBDIRS:=chapter4 chapter6
+SUBDIRS:=heapsort
 
 define op_subdir
 	for sub in $(SUBDIRS) ; do \

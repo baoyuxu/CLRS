@@ -1,5 +1,8 @@
 #include<iostream>
 
+namespace XY
+{
+
 template<typename T>
 struct maximum_subarray;
 template<typename T>
@@ -68,11 +71,12 @@ maximum_subarray<T> find_maximum_subarray(T *array, ssize_t low, ssize_t high)
         return crossing_max;
 }
 
+}//namespace XY
 
 int main(int argc, char const* argv[])
 {
     int a[5] = {10, -5, 5, -1, 846};
-    auto x = find_maximum_subarray(a, 0, 4);
+    auto x = XY::find_maximum_subarray(a, 0, 4);
     std::cout<<x.max_left<<" "<<x.max_right<<" "<<x.sum<<std::endl;
     return 0;
 }
