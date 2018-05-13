@@ -1,4 +1,4 @@
-SUBDIRS:=chapter4 chapter6 chapter7
+SUBDIRS:=quick_sort
 
 define op_subdir
 	for sub in $(SUBDIRS) ; do \
