@@ -48,7 +48,7 @@ class heap
         {
             return _heap[1];
         }
-        void extract_maxmum()
+        void extract_maximum()
         {
             _heap[1] = _heap[_size];
             _heap.pop_back();
