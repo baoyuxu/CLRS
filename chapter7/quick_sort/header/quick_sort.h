@@ -1,4 +1,6 @@
-#include<iostream>
+#ifndef QUICK_SORT_H
+#define QUICK_SORT_H
+
 #include<functional>
 
 namespace XY
@@ -40,13 +42,4 @@ ssize_t partition(T *const p, ssize_t low, ssize_t high)
 
 } //namespace XY
 
-int main(int argc, char const* argv[])
-{
-    int a[5] = {46, 8643, -46, -465, 38468};
-    XY::quick_sort(a, 0, 4);
-    for(int i=0; i<5; ++i)
-        std::cout<<a[i]<<" ";
-    std::cout<<std::endl;
-    return 0;
-}
-
+#endif

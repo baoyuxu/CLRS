@@ -1,4 +1,6 @@
-#include<iostream>
+#ifndef LINEAR_H
+#define LINEAR_H
+#include <sys/types.h>
 
 namespace XY
 {
@@ -43,11 +45,4 @@ maximum_subarray<T> find_maximum_subarray(T *const ptr, ssize_t low, ssize_t hig
 }
 
 }//namespace XY
-
-int main(int argc, char const* argv[])
-{
-    int a[5] = {80, -10, 8, -60, 1006};
-    auto x = XY::find_maximum_subarray(a, 0, 4);
-    std::cout<<x.low<<" "<<x.high<<" "<<x.sum<<std::endl;
-    return 0;
-}
+#endif

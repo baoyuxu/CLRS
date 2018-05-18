@@ -1,10 +1,8 @@
-#include<iostream>
+#ifndef HEAPSORT_H
+#define HEAPSORT_H
+
 #include<functional>
 #include<vector>
-
-#ifdef DEBUG
-#define private public
-#endif
 
 namespace XY
 {
@@ -164,16 +162,4 @@ class heap
 };
 
 } // namespace XY
-
-int main(int argc, char const* argv[])
-{
-    std::vector<int> v = {465, 12, 684, 9, -5};
-    XY::heap<int> heap(v);
-    std::vector<int> r(heap.heap_sort());
-    for(int i = 0; i < r.size(); ++i)
-        std::cout<<r[i]<<" ";
-    std::cout<<std::endl;
-    return 0;
-}
-
-
+#endif

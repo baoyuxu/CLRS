@@ -1,4 +1,4 @@
-#include<iostream>
+#include "../header/counting_sort.h"
 
 void counting_sort(int *src, int *des, ssize_t k)
 {
@@ -15,13 +15,3 @@ void counting_sort(int *src, int *des, ssize_t k)
     }
 }
 
-int main(int argc, char const* argv[])
-{
-    int src[5]={4, 0, 1, 2, 2};
-    int des[5];
-    counting_sort(src, des, 5);
-    for(ssize_t i=0; i<5; ++i)
-        std::cout<<des[i]<<" ";
-    std::cout<<std::endl;
-    return 0;
-}
