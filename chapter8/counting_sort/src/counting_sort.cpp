@@ -1,4 +1,4 @@
-#include "../header/counting_sort.h"
+#include "counting_sort.h"
 
 void counting_sort(int *src, int *des, ssize_t k)
 {

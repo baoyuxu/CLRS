@@ -1,4 +1,4 @@
-#include "../header/heapsort.h"
+#include "heapsort.h"
 #include "gtest/gtest.h"
 
 TEST(heapsort, test)

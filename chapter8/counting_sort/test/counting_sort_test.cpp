@@ -1,4 +1,4 @@
-#include "../header/counting_sort.h"
+#include "counting_sort.h"
 #include "gtest/gtest.h"
 
 TEST(couning_sort, no_same_elem)
