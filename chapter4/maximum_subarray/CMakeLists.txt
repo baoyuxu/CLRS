@@ -4,9 +4,7 @@ file(RELATIVE_PATH rel ${CMAKE_BINARY_DIR} ${PROJECT_BINARY_DIR})
 
 set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR}/out/${rel}/bin )
 
-include_directories($ENV{GTEST_INC})
 include_directories(./header)
-link_directories($ENV{GTEST_LIB})
 
 aux_source_directory(./src SRC)
 

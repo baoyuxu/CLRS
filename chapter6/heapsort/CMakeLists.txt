@@ -5,8 +5,6 @@ set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR}/out/${rel}/bin )
 
 aux_source_directory(./src SRC)
 
-include_directories($ENV{GTEST_INC})
 include_directories(./header)
-link_directories($ENV{GTEST_LIB})
 add_executable(heapsort_test ${SRC} ./test/heapsort_test.cpp)
 target_link_libraries(heapsort_test gtest gtest_main gmock pthread)
